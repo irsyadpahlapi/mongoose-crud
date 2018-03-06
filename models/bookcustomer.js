@@ -3,7 +3,10 @@ var Schema = mongoose.Schema;
 
 
 var transactionsschema = new Schema({
-  member:String,
+  member:{
+    type:Schema.Types.ObjectId,
+    ref:'customer'
+  },
   days:Number,
   out_date:{
     type: Date,
@@ -11,13 +14,17 @@ var transactionsschema = new Schema({
   },
   due_date:{
     type: Date,
-    default: Date.now
+    default: ''
   },
   in_date:{
     type: Date,
-    default: Date.now
+    default: ''
   },
   fine:Number,
+  booklist:[{
+    type:Schema.Types.ObjectId,
+    ref:'books'
+  }],
   createdAt:
   {
     type: Date,
@@ -25,5 +32,5 @@ var transactionsschema = new Schema({
   }
 });
 
-const Transaction = mongoose.model('books',transactionsschema)
+const Transaction = mongoose.model('transaction',transactionsschema)
 module.exports= Transaction
